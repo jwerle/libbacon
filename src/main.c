@@ -110,6 +110,7 @@ main (int argc, char **argv) {
           // error
           fprintf(stderr, "unknown command: `%s'\n", opt);
           usage();
+          return 1;
         }
       }
 
