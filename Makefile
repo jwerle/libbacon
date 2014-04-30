@@ -29,12 +29,13 @@ ifeq ($(OS), Darwin)
 	LDFLAGS += -lc -Wl,-install_name,$(TARGET_DSO)
 endif
 
-bacon: $(TARGET_STATIC) $(TARGET_DSO)
+$(BIN_NAME): $(TARGET_STATIC) $(TARGET_DSO)
 	$(CC) $(CFLAGS) $(SRC) src/main.c -o $(BIN_NAME)
 
-install:
+install: $(BIN_NAME)
 	install include/bacon.h $(PREFIX)/include
 	install $(TARGET_DSO) $(PREFIX)/lib
+	install $(BIN_NAME) $(PREFIX)/bin
 
 $(TARGET_STATIC): $(OBJS)
 	ar crus $(TARGET_STATIC) $(OBJS)
