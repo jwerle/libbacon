@@ -99,7 +99,7 @@ A B CD E F G H IIKL MNO PQRST UUWX YZ
 
 ## api
 
-See `[bacon.h](https://github.com/jwerle/libbacon/blob/master/include/bacon.h)`
+See [bacon.h](https://github.com/jwerle/libbacon/blob/master/include/bacon.h)
 
 ## license
 
