@@ -7,7 +7,9 @@ A C implementation of the Baconian Cipher ! BACON
 
 Inspired by [bacon-cipher](https://github.com/mathiasbynens/bacon-cipher) !
 
-By default it uses the most common Bacon cipher alphabet, i.e. ABCDEFGHIKLMNOPQRSTUWXYZ (24 letters). This boils down to the following translations:
+Encode or decodes a message with each letter of the plaintext replaced by a group of five of the letters consisting of either an `A` or `B`. This replacement is a binary encoding and is done according to the alphabet of the [Baconian cipher](http://en.wikipedia.org/wiki/Bacon's_cipher).
+
+The default translation table is shown below:
 
 ```
 a   AAAAA   g     AABBA   n    ABBAA   t     BAABA
