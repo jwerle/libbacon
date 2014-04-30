@@ -8,6 +8,9 @@ OBJS = $(SRC:.c=.o)
 OS = $(shell uname)
 
 PREFIX ?= /usr/local
+MANPREFIX ?= $(PREFIX)/share/man/man1
+
+MAN_FILES = $(wildcard man/*.md)
 
 BIN_NAME ?= bacon
 LIB_NAME ?= bacon
@@ -36,6 +39,7 @@ install: $(BIN_NAME)
 	install include/bacon.h $(PREFIX)/include
 	install $(TARGET_DSO) $(PREFIX)/lib
 	install $(BIN_NAME) $(PREFIX)/bin
+	install $(MAN_FILES:%.md=%.1) $(MANPREFIX)
 
 $(TARGET_STATIC): $(OBJS)
 	ar crus $(TARGET_STATIC) $(OBJS)
@@ -66,4 +70,9 @@ clean:
 	rm -f $(OBJS) $(BIN_NAME) $(TARGET_STATIC) $(TARGET_DSO) $(TARGET_DSOLIB) *.so* test-$(BIN_NAME)
 	make clean -C deps/ok
 
-.PHONY: deps
+docs: $(MAN_FILES)
+
+$(MAN_FILES):
+	curl -# -F page=@$(@) -o $(@:%.md=%.1) http://mantastic.herokuapp.com
+
+.PHONY: deps $(MAN_FILES)
