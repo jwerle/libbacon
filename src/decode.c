@@ -24,6 +24,8 @@ bacon_decode (const char *src, const char *alpha) {
   int idx = -1;
   int custom = 0;
 
+  if (NULL == dec) { return NULL; }
+
   // use default
   if (NULL == alpha) {
     alpha = BACON_ALPHA;

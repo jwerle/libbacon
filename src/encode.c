@@ -22,6 +22,8 @@ bacon_encode (const char *src, const char *alpha) {
   int sep = 0;
   int idx = -1;
 
+  if (NULL == enc) { return NULL; }
+
   // use default
   if (NULL == alpha) {
     alpha = BACON_ALPHA;
