@@ -3,6 +3,8 @@ libbacon
 
 A C implementation of the Baconian Cipher ! BACON
 
+Inspired by [bacon-cipher](https://github.com/mathiasbynens/bacon-cipher) !
+
 ## install
 
 [clib](https://github.com/clibs/clib):
