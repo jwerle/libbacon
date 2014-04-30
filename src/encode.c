@@ -1,5 +1,10 @@
 
-#include <stdio.h>
+/**
+ * `encode.c' - libbacon
+ *
+ * copyright (c) 2014 joseph werle <joseph.werle@gmail.com>
+ */
+
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
@@ -22,8 +27,10 @@ bacon_encode (const char *src, const char *alpha) {
     alpha = BACON_ALPHA;
   } else { custom = 1; }
 
+  // alpha length
   alen = (size_t) strlen(alpha);
 
+  // parse and encode
   while ((++i) < len) {
 
     ch = toupper(src[i]);
@@ -63,11 +70,11 @@ found:
       }
 
       // encode
-      enc[size++] = idx & 0x10 ? 'B' : 'A';
-      enc[size++] = idx & 0x08 ? 'B' : 'A';
-      enc[size++] = idx & 0x04 ? 'B' : 'A';
-      enc[size++] = idx & 0x02 ? 'B' : 'A';
-      enc[size++] = idx & 0x01 ? 'B' : 'A';
+      enc[size++] = idx & 0x10 ? BACON_B : BACON_A;
+      enc[size++] = idx & 0x08 ? BACON_B : BACON_A;
+      enc[size++] = idx & 0x04 ? BACON_B : BACON_A;
+      enc[size++] = idx & 0x02 ? BACON_B : BACON_A;
+      enc[size++] = idx & 0x01 ? BACON_B : BACON_A;
 
       // reset
       sep = 0;

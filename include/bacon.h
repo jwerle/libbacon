@@ -28,6 +28,18 @@
 #define BACON_ALPHA "ABCDEFGHIKLMNOPQRSTUWXYZ"
 
 /**
+ * Bacon 0 binary char
+ */
+
+#define BACON_A 'A'
+
+/**
+ * Bacon 1 binary char
+ */
+
+#define BACON_B 'B'
+
+/**
  * Encodes a string with baconian cipher
  * using an alphabet
  */
