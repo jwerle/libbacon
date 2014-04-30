@@ -1,15 +1,13 @@
 {
   "name": "bacon",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "repo": "jwerle/libbacon",
   "description": "A C implementation of the Baconian Cipher",
   "keywords": ["bacon", "baconian", "cipher"],
   "license": "MIT",
-  "install": "make install",
   "src": [
     "include/bacon.h",
     "src/encode.c",
-    "src/decode.c",
-    "src/main.c"
+    "src/decode.c"
   ]
 }
