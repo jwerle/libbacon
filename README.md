@@ -3,7 +3,20 @@ libbacon
 
 A C implementation of the Baconian Cipher ! BACON
 
+## about
+
 Inspired by [bacon-cipher](https://github.com/mathiasbynens/bacon-cipher) !
+
+By default it uses the most common Bacon cipher alphabet, i.e. ABCDEFGHIKLMNOPQRSTUWXYZ (24 letters). This boils down to the following translations:
+
+```
+a   AAAAA   g     AABBA   n    ABBAA   t     BAABA
+b   AAAAB   h     AABBB   o    ABBAB   u-v   BAABB
+c   AAABA   i-j   ABAAA   p    ABBBA   w     BABAA
+d   AAABB   k     ABAAB   q    ABBBB   x     BABAB
+e   AABAA   l     ABABA   r    BAAAA   y     BABBA
+f   AABAB   m     ABABB   s    BAAAB   z     BABBB
+```
 
 ## install
 
