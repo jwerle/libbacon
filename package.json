@@ -1,6 +1,6 @@
 {
   "name": "bacon",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "repo": "jwerle/libbacon",
   "description": "A C implementation of the Baconian Cipher",
   "keywords": ["bacon", "baconian", "cipher"],
