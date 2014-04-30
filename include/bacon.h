@@ -18,7 +18,7 @@
  */
 
 #ifndef BACON_VERSION
-#define BACON_VERSION "0.0.1" // default
+#define BACON_VERSION "1" // default
 #endif
 
 /**
