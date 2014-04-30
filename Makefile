@@ -62,7 +62,7 @@ deps:
 	make -C deps/ok
 
 clean:
-	rm -f $(OBJS) $(BIN_NAME) $(TARGET_STATIC) test-$(BIN_NAME)
+	rm -f $(OBJS) $(BIN_NAME) $(TARGET_STATIC) $(TARGET_DSO) $(TARGET_DSOLIB) *.so* test-$(BIN_NAME)
 	make clean -C deps/ok
 
 .PHONY: deps
