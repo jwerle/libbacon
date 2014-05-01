@@ -15,15 +15,15 @@ enum { NO_OP, ENCODE_OP, DECODE_OP };
 
 static void
 usage () {
-  fprintf(stderr, "usage: bacon [-hV] [--encode|--decode] [--alphabet='ABC'\n");
+  fprintf(stderr, "usage: bacon [-hV] [--encode|--decode] [--alphabet='ABC']\n");
 }
 
 static void
 help () {
-  fprintf(stderr, "\noptionss:\n");
-  fprintf(stderr, "\n  --encode           Encode stdin stream");
-  fprintf(stderr, "\n  --decode           Decode stdin stream");
-  fprintf(stderr, "\n  --alphabet=[ALPHA] Cipher alphabet (Default: 'ABCDEFGHIKLMNOPQRSTUWXYZ'");
+  fprintf(stderr, "\noptions:\n");
+  fprintf(stderr, "\n  --encode            Encode stdin stream");
+  fprintf(stderr, "\n  --decode            Decode stdin stream");
+  fprintf(stderr, "\n  --alphabet=[ALPHA]  Cipher alphabet (Default: 'ABCDEFGHIKLMNOPQRSTUWXYZ')");
   fprintf(stderr, "\n");
 }
 

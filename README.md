@@ -44,12 +44,12 @@ $ make install
 *encode:*
 
 ```sh
-$ echo abc | bacon encode
+$ echo abc | bacon --encode
 AAAAAAAAABAAABA
 ```
 
 ```sh
-$ { echo abc && echo def && echo ghi; }  | bacon encode
+$ { echo abc && echo def && echo ghi; }  | bacon --encode
 AAAAAAAAABAAABA
 AAABBAABAAAABAB
 AABBAAABBBABAAA
@@ -58,13 +58,12 @@ AABBAAABBBABAAA
 *decode:*
 
 ```sh
-$ echo AAAAAAAAABAAABA | bacon decode
+$ echo AAAAAAAAABAAABA | bacon --decode
 ABC
 ```
 
 ```sh
-$ { echo 'AAAAAAAAABAAABA' && echo 'AAABBAABAAAABAB' && echo
-'AABBAAABBBABAAA'; } | bacon decode
+$ { echo 'AAAAAAAAABAAABA' && echo 'AAABBAABAAAABAB' && echo 'AABBAAABBBABAAA'; } | bacon --decode
 ABC
 DEF
 GHI

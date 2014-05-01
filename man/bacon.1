@@ -1,13 +1,13 @@
 .\" Generated with Ronnjs 0.3.8
 .\" http://github.com/kapouer/ronnjs/
 .
-.TH "BACON" "1" "April 2014" "" ""
+.TH "BACON" "1" "May 2014" "" ""
 .
 .SH "NAME"
 \fBbacon\fR \-\- Command line Baconian Cipher utility
 .
 .SH "SYNOPSIS"
-\fBbacon\fR [\-hV] <command> [alpha]
+\fBbacon\fR [\-hV] [\-\-encode|\-\-decode] [\-\-alphabet=\'ABC\']
 .
 .SH "OPTIONS"
   \-V, \-\-version
@@ -17,17 +17,43 @@
   \-h, \-\-help
       output help information
 .
-.SH "INPUT"
-  [alpha]
-      cipher alphabet\. Default: \'ABCDEFGHIKLMNOPQRSTUWXYZ\'
-.
-.SH "COMMANDS"
-  \fBencode\fR
+.P
+  \-\-encode
       Encode stdin stream
 .
 .P
-  \fBdecode\fR
+  \-\-decode
       Decode stdin stream
+.
+.P
+  \-\-alphabet=[ALPHA]
+      Cipher alphabet (Default: \'ABCDEFGHIKLMNOPQRSTUWXYZ\')
+.
+.SH "EXAMPLES"
+\fIencode:\fR
+.
+.P
+  $ echo abc | bacon \-\-encode
+  AAAAAAAAABAAABA
+.
+.P
+  $ { echo abc && echo def && echo ghi; }  | bacon \-\-encode
+  AAAAAAAAABAAABA
+  AAABBAABAAAABAB
+  AABBAAABBBABAAA
+.
+.P
+\fIdecode:\fR
+.
+.P
+  $ echo AAAAAAAAABAAABA | bacon \-\-decode
+  ABC
+.
+.P
+  $ { echo \'AAAAAAAAABAAABA\' && echo \'AAABBAABAAAABAB\' && echo \'AABBAAABBBABAAA\'; } | bacon \-\-decode
+  ABC
+  DEF
+  GHI
 .
 .SH "AUTHOR"
 .

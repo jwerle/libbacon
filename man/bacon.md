@@ -3,7 +3,7 @@ bacon(1) -- Command line Baconian Cipher utility
 
 ## SYNOPSIS
 
-`bacon` [-hV] <command> [alpha]
+`bacon` [-hV] [--encode|--decode] [--alphabet='ABC']
 
 ## OPTIONS
 
@@ -13,18 +13,36 @@ bacon(1) -- Command line Baconian Cipher utility
   -h, --help
       output help information
 
-## INPUT
-
-  [alpha]
-      cipher alphabet. Default: 'ABCDEFGHIKLMNOPQRSTUWXYZ'
-
-## COMMANDS
-
-  `encode`
+  --encode
       Encode stdin stream
 
-  `decode`
+  --decode
       Decode stdin stream
+
+  --alphabet=[ALPHA]
+      Cipher alphabet (Default: 'ABCDEFGHIKLMNOPQRSTUWXYZ')
+
+## EXAMPLES
+
+*encode:*
+
+  $ echo abc | bacon --encode
+  AAAAAAAAABAAABA
+
+  $ { echo abc && echo def && echo ghi; }  | bacon --encode
+  AAAAAAAAABAAABA
+  AAABBAABAAAABAB
+  AABBAAABBBABAAA
+
+*decode:*
+
+  $ echo AAAAAAAAABAAABA | bacon --decode
+  ABC
+
+  $ { echo 'AAAAAAAAABAAABA' && echo 'AAABBAABAAAABAB' && echo 'AABBAAABBBABAAA'; } | bacon --decode
+  ABC
+  DEF
+  GHI
 
 ## AUTHOR
 
