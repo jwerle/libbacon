@@ -12,7 +12,7 @@ MANPREFIX ?= $(PREFIX)/share/man/man1
 
 MAN_FILES = $(wildcard man/*.md)
 
-BIN_NAME ?= bacon
+BIN ?= bacon
 LIB_NAME ?= bacon
 
 VERSION_MAJOR = 0
@@ -32,13 +32,13 @@ ifeq ($(OS), Darwin)
 	LDFLAGS += -lc -Wl,-install_name,$(TARGET_DSO)
 endif
 
-$(BIN_NAME): $(TARGET_STATIC) $(TARGET_DSO)
-	$(CC) $(CFLAGS) $(SRC) src/main.c -o $(BIN_NAME)
+$(BIN): $(TARGET_STATIC) $(TARGET_DSO)
+	$(CC) $(CFLAGS) $(SRC) src/main.c -o $(BIN)
 
-install: $(BIN_NAME)
+install: $(BIN)
 	install include/bacon.h $(PREFIX)/include
 	install $(TARGET_DSO) $(PREFIX)/lib
-	install $(BIN_NAME) $(PREFIX)/bin
+	install $(BIN) $(PREFIX)/bin
 	install $(MAN_FILES:%.md=%.1) $(MANPREFIX)
 
 $(TARGET_STATIC): $(OBJS)
@@ -60,15 +60,21 @@ $(OBJS):
 	$(CC) $(CFLAGS) -c -o $@ $(@:.o=.c)
 
 test: $(OBJS) $(TARGET_STATIC) deps
-	cc deps/ok/libok.a -Ideps/ok $(CFLAGS) $(TARGET_STATIC) test.c -o test-$(BIN_NAME)
-	./test-$(BIN_NAME)
+	cc deps/ok/libok.a -Ideps/ok $(CFLAGS) $(TARGET_STATIC) test.c -o test-$(BIN)
+	./test-$(BIN)
 
 deps:
 	make -C deps/ok
 
 clean:
-	rm -f $(OBJS) $(BIN_NAME) $(TARGET_STATIC) $(TARGET_DSO) $(TARGET_DSOLIB) *.so* test-$(BIN_NAME)
 	make clean -C deps/ok
+	rm -f $(OBJS)
+	rm -f $(BIN)
+	rm -f $(TARGET_STATIC)
+	rm -f $(TARGET_DSO)
+	rm -f $(TARGET_DSOLIB)
+	rm -f *.so*
+	rm -f test-$(BIN)
 
 docs: $(MAN_FILES)
 
