@@ -11,16 +11,19 @@
 #include <unistd.h>
 #include <bacon.h>
 
+enum { NO_OP, ENCODE_OP, DECODE_OP };
+
 static void
 usage () {
-  fprintf(stderr, "usage: bacon [-hV] <command> [alpha]\n");
+  fprintf(stderr, "usage: bacon [-hV] [--encode|--decode] [--alphabet='ABC'\n");
 }
 
 static void
 help () {
-  fprintf(stderr, "\ncommands:\n");
-  fprintf(stderr, "\n   encode     Encode stdin stream");
-  fprintf(stderr, "\n   decode     Decode stdin stream");
+  fprintf(stderr, "\noptionss:\n");
+  fprintf(stderr, "\n  --encode           Encode stdin stream");
+  fprintf(stderr, "\n  --decode           Decode stdin stream");
+  fprintf(stderr, "\n  --alphabet=[ALPHA] Cipher alphabet (Default: 'ABCDEFGHIKLMNOPQRSTUWXYZ'");
   fprintf(stderr, "\n");
 }
 
@@ -69,12 +72,14 @@ main (int argc, char **argv) {
   char *buf = NULL;
   char *alpha = NULL;
   char *out = NULL;
+  int op = NO_OP;
 
   // emit usage with empty arguments
   if (1 == argc) { return usage(), 1; }
 
   // parse opts
   {
+    int i = 0;
     char *opt = NULL;
     char tmp = 0;
 
@@ -83,8 +88,7 @@ main (int argc, char **argv) {
     while ((opt = *argv++)) {
 
       // flags
-      if ('-' == opt[0]) {
-        tmp = *opt++; // unused
+      if ('-' == *opt++) {
         switch (*opt++) {
           case 'h':
             return usage(), help(), 0;
@@ -92,33 +96,27 @@ main (int argc, char **argv) {
           case 'V':
             fprintf(stderr, "%s\n", BACON_VERSION);
             return 0;
-        }
-      } else {
 
-        // actions
-        {
-          // decode
-          if (0 == strcmp("decode", opt)) {
-            goto decode;
-          }
+          case '-':
+            if (0 == strcmp(opt, "encode")) { op = ENCODE_OP;}
+            if (0 == strcmp(opt, "decode")) { op = DECODE_OP;}
+            if (0 == strncmp(opt, "alphabet=", 8)) {
+              for (i = 0; i < 9; ++i) tmp = *opt++;
+              alpha = opt;
+            }
+            break;
 
-          // encode
-          if (0 == strcmp("encode", opt)) {
-            goto encode;
-          }
-
-          // error
-          fprintf(stderr, "unknown command: `%s'\n", opt);
-          usage();
-          return 1;
+          default:
+            // error
+            fprintf(stderr, "unknown command: `%s'\n", opt);
+            usage();
+            return 1;
         }
       }
-
     }
   }
 
-#define op(name) {                               \
-  alpha = *argv++;                               \
+#define OP(name) {                               \
   buf = read_stdin();                            \
   if (NULL == buf) { return 1; }                 \
   out = bacon_ ## name(buf, alpha);              \
@@ -131,21 +129,23 @@ main (int argc, char **argv) {
   } while (NULL != buf);                         \
 }
 
-decode:
-  {
+switch (op) {
+  case ENCODE_OP:
     if (1 == isatty(0)) { return 1; }
     else if (ferror(stdin)) { return 1; }
-    else { op(decode); }
+    else { OP(encode); }
     return 0;
-  }
 
-encode:
-  {
+  case DECODE_OP:
     if (1 == isatty(0)) { return 1; }
     else if (ferror(stdin)) { return 1; }
-    else { op(encode); }
+    else { OP(decode); }
     return 0;
-  }
 
-#undef op
+  case NO_OP:
+  default:
+    return usage(), 1;
+}
+
+#undef OP
 }

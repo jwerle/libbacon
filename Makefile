@@ -17,7 +17,7 @@ LIB_NAME ?= bacon
 
 VERSION_MAJOR = 0
 VERSION_MINOR = 0
-VERSION_PATCH = 5
+VERSION_PATCH = 6
 
 TARGET_NAME = lib$(LIB_NAME)
 TARGET_STATIC = $(TARGET_NAME).a
@@ -60,7 +60,7 @@ $(OBJS):
 	$(CC) $(CFLAGS) -c -o $@ $(@:.o=.c)
 
 test: $(OBJS) $(TARGET_STATIC) deps
-	cc deps/ok/libok.a $(CFLAGS) $(TARGET_STATIC) test.c -o test-$(BIN_NAME)
+	cc deps/ok/libok.a -Ideps/ok $(CFLAGS) $(TARGET_STATIC) test.c -o test-$(BIN_NAME)
 	./test-$(BIN_NAME)
 
 deps:
