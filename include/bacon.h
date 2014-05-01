@@ -6,6 +6,7 @@
  */
 
 #ifndef BACON_H
+#define BACON_H 1
 
 #if __GNUC__ >= 4
 # define BACON_EXTERN __attribute__((visibility("default")))
@@ -25,19 +26,25 @@
  * Bacon alphabet
  */
 
+#ifndef BACON_ALPHA
 #define BACON_ALPHA "ABCDEFGHIKLMNOPQRSTUWXYZ"
+#endif
 
 /**
  * Bacon 0 binary char
  */
 
+#ifndef BACON_A
 #define BACON_A 'A'
+#endif
 
 /**
  * Bacon 1 binary char
  */
 
+#ifndef BACON_B
 #define BACON_B 'B'
+#endif
 
 /**
  * Encodes a string with baconian cipher
