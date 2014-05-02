@@ -108,7 +108,7 @@ main (int argc, char **argv) {
 
           default:
             // error
-            fprintf(stderr, "unknown command: `%s'\n", opt);
+            fprintf(stderr, "unknown option: `%s'\n", opt);
             usage();
             return 1;
         }
